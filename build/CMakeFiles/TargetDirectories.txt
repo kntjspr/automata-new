@@ -1,0 +1,10 @@
+/home/xo/Downloads/automata/automata-main/build/CMakeFiles/automata_engine.dir
+/home/xo/Downloads/automata/automata-main/build/CMakeFiles/automata_engine_static.dir
+/home/xo/Downloads/automata/automata-main/build/CMakeFiles/automata_cli.dir
+/home/xo/Downloads/automata/automata-main/build/CMakeFiles/api_server.dir
+/home/xo/Downloads/automata/automata-main/build/CMakeFiles/edit_cache.dir
+/home/xo/Downloads/automata/automata-main/build/CMakeFiles/rebuild_cache.dir
+/home/xo/Downloads/automata/automata-main/build/CMakeFiles/list_install_components.dir
+/home/xo/Downloads/automata/automata-main/build/CMakeFiles/install.dir
+/home/xo/Downloads/automata/automata-main/build/CMakeFiles/install/local.dir
+/home/xo/Downloads/automata/automata-main/build/CMakeFiles/install/strip.dir

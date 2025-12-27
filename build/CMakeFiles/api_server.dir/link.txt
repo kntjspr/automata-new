@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/api_server.dir/link.d CMakeFiles/api_server.dir/src/api_server.cpp.o -o api_server  libautomata_engine_static.a -lpthread

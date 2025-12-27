@@ -1,0 +1,61 @@
+=== Regular Expression Demo ===
+
+Pattern: (AT|CG)*A?(GG+|T{2,3})(C|GA)?A+T
+
+1. NFA constructed via Thompson's algorithm:
+   States: 54
+   Transitions: 65
+
+2. DFA constructed via subset construction:
+   States: 21
+   Transitions: 49
+
+3. Minimized DFA:
+   States: 14
+   Transitions: 31
+
+4. Regular Grammar:
+   S -> AJ
+   S -> CK
+   S -> GL
+   S -> TM
+   J -> GL
+   J -> TB
+   K -> GS
+   L -> GE
+   M -> TC
+   B -> AJ
+   B -> CK
+   B -> GL
+   B -> TD
+   E -> AG
+   E -> CI
+   E -> GE
+   C -> AG
+   C -> CI
+   C -> GH
+   C -> TF
+   D -> AG
+   D -> CI
+   D -> GH
+   D -> TC
+   G -> AG
+   G -> TA
+   I -> AG
+   H -> AI
+   F -> AG
+   F -> CI
+   F -> GH
+   A -> ε
+
+5. Testing "TTAAT": ACCEPTED ✓
+
+Execution trace:
+   q2 --[T]--> q13
+   q13 --[T]--> q3
+   q3 --[A]--> q7
+   q7 --[A]--> q7
+   q7 --[T]--> q0 (accepting)
+
+JSON Output:
+{"type":"DFA","startState":2,"acceptingStates":[0],"states":[{"id":0,"label":"q0","isAccepting":true,"isStart":false},{"id":1,"label":"q1","isAccepting":false,"isStart":false},{"id":2,"label":"q2","isAccepting":false,"isStart":true},{"id":3,"label":"q3","isAccepting":false,"isStart":false},{"id":4,"label":"q4","isAccepting":false,"isStart":false},{"id":5,"label":"q5","isAccepting":false,"isStart":false},{"id":6,"label":"q6","isAccepting":false,"isStart":false},{"id":7,"label":"q7","isAccepting":false,"isStart":false},{"id":8,"label":"q8","isAccepting":false,"isStart":false},{"id":9,"label":"q9","isAccepting":false,"isStart":false},{"id":10,"label":"q10","isAccepting":false,"isStart":false},{"id":11,"label":"q11","isAccepting":false,"isStart":false},{"id":12,"label":"q12","isAccepting":false,"isStart":false},{"id":13,"label":"q13","isAccepting":false,"isStart":false}],"transitions":[{"from":2,"to":10,"symbol":"A","isEpsilon":false},{"from":2,"to":11,"symbol":"C","isEpsilon":false},{"from":2,"to":12,"symbol":"G","isEpsilon":false},{"from":2,"to":13,"symbol":"T","isEpsilon":false},{"from":10,"to":12,"symbol":"G","isEpsilon":false},{"from":10,"to":1,"symbol":"T","isEpsilon":false},{"from":11,"to":2,"symbol":"G","isEpsilon":false},{"from":12,"to":5,"symbol":"G","isEpsilon":false},{"from":13,"to":3,"symbol":"T","isEpsilon":false},{"from":1,"to":10,"symbol":"A","isEpsilon":false},{"from":1,"to":11,"symbol":"C","isEpsilon":false},{"from":1,"to":12,"symbol":"G","isEpsilon":false},{"from":1,"to":4,"symbol":"T","isEpsilon":false},{"from":5,"to":7,"symbol":"A","isEpsilon":false},{"from":5,"to":9,"symbol":"C","isEpsilon":false},{"from":5,"to":5,"symbol":"G","isEpsilon":false},{"from":3,"to":7,"symbol":"A","isEpsilon":false},{"from":3,"to":9,"symbol":"C","isEpsilon":false},{"from":3,"to":8,"symbol":"G","isEpsilon":false},{"from":3,"to":6,"symbol":"T","isEpsilon":false},{"from":4,"to":7,"symbol":"A","isEpsilon":false},{"from":4,"to":9,"symbol":"C","isEpsilon":false},{"from":4,"to":8,"symbol":"G","isEpsilon":false},{"from":4,"to":3,"symbol":"T","isEpsilon":false},{"from":7,"to":7,"symbol":"A","isEpsilon":false},{"from":7,"to":0,"symbol":"T","isEpsilon":false},{"from":9,"to":7,"symbol":"A","isEpsilon":false},{"from":8,"to":9,"symbol":"A","isEpsilon":false},{"from":6,"to":7,"symbol":"A","isEpsilon":false},{"from":6,"to":9,"symbol":"C","isEpsilon":false},{"from":6,"to":8,"symbol":"G","isEpsilon":false}]}

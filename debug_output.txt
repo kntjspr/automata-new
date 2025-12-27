@@ -1,0 +1,37 @@
+============================================================
+DEBUGGING 'TTA' RETURN VALUE ISSUE
+============================================================
+Pattern: ^(AT|CG)*A?(GG+|T{2,3})(C|GA)?A+T$
+Sequence: TTAAT
+
+Test 1: Full match (re.fullmatch)
+  Result: TTAAT
+
+Test 2: Search (re.search)
+  Result: TTAAT
+
+Test 3: Without anchors: (AT|CG)*A?(GG+|T{2,3})(C|GA)?A+T
+  Found at 0-5: 'TTAAT'
+
+Test 4: finditer (like JS regex.exec loop)
+  Found at 0-5: 'TTAAT'
+
+Test 5: Could there be a different pattern interpretation?
+  Pattern '(AT|CG)*A?(GG+|T{2,3})' matches: ['TT']
+  Pattern 'T{2,3}' matches: ['TT']
+  Pattern 'TT' matches: ['TT']
+  Pattern 'A+' matches: ['AA']
+
+Test 6: Check if {2,3} is causing issues
+  T repeated 2-3 times (T{2,3}): ['TT']
+  T repeated exactly 2 times (T{2}): ['TT']
+  Literal TT (TT): ['TT']
+
+============================================================
+CONCLUSION
+============================================================
+If 'TTA' was returned, possible causes:
+1. The pattern was truncated or modified before matching
+2. The sequence was different than expected
+3. An older version of the code was running
+4. The C++ backend was used and it didn't support the full pattern

@@ -1,0 +1,34 @@
+=== Regular Expression Demo ===
+
+Pattern: a(b|c)*d
+
+1. NFA constructed via Thompson's algorithm:
+   States: 12
+   Transitions: 14
+
+2. DFA constructed via subset construction:
+   States: 5
+   Transitions: 10
+
+3. Minimized DFA:
+   States: 3
+   Transitions: 4
+
+4. Regular Grammar:
+   S -> aB
+   B -> bB
+   B -> cB
+   B -> dA
+   A -> ε
+
+5. Testing "abcbd": ACCEPTED ✓
+
+Execution trace:
+   q1 --[a]--> q2
+   q2 --[b]--> q2
+   q2 --[c]--> q2
+   q2 --[b]--> q2
+   q2 --[d]--> q0 (accepting)
+
+JSON Output:
+{"type":"DFA","startState":1,"acceptingStates":[0],"states":[{"id":0,"label":"q0","isAccepting":true,"isStart":false},{"id":1,"label":"q1","isAccepting":false,"isStart":true},{"id":2,"label":"q2","isAccepting":false,"isStart":false}],"transitions":[{"from":1,"to":2,"symbol":"a","isEpsilon":false},{"from":2,"to":2,"symbol":"b","isEpsilon":false},{"from":2,"to":2,"symbol":"c","isEpsilon":false},{"from":2,"to":0,"symbol":"d","isEpsilon":false}]}

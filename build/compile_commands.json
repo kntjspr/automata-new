@@ -1,0 +1,122 @@
+[
+{
+  "directory": "/home/xo/Downloads/automata/automata-main/build",
+  "command": "/usr/bin/c++ -Dautomata_engine_EXPORTS -I/home/xo/Downloads/automata/automata-main/include -O3 -DNDEBUG -std=gnu++17 -fPIC -o CMakeFiles/automata_engine.dir/src/state.cpp.o -c /home/xo/Downloads/automata/automata-main/src/state.cpp",
+  "file": "/home/xo/Downloads/automata/automata-main/src/state.cpp",
+  "output": "CMakeFiles/automata_engine.dir/src/state.cpp.o"
+},
+{
+  "directory": "/home/xo/Downloads/automata/automata-main/build",
+  "command": "/usr/bin/c++ -Dautomata_engine_EXPORTS -I/home/xo/Downloads/automata/automata-main/include -O3 -DNDEBUG -std=gnu++17 -fPIC -o CMakeFiles/automata_engine.dir/src/transition.cpp.o -c /home/xo/Downloads/automata/automata-main/src/transition.cpp",
+  "file": "/home/xo/Downloads/automata/automata-main/src/transition.cpp",
+  "output": "CMakeFiles/automata_engine.dir/src/transition.cpp.o"
+},
+{
+  "directory": "/home/xo/Downloads/automata/automata-main/build",
+  "command": "/usr/bin/c++ -Dautomata_engine_EXPORTS -I/home/xo/Downloads/automata/automata-main/include -O3 -DNDEBUG -std=gnu++17 -fPIC -o CMakeFiles/automata_engine.dir/src/nfa.cpp.o -c /home/xo/Downloads/automata/automata-main/src/nfa.cpp",
+  "file": "/home/xo/Downloads/automata/automata-main/src/nfa.cpp",
+  "output": "CMakeFiles/automata_engine.dir/src/nfa.cpp.o"
+},
+{
+  "directory": "/home/xo/Downloads/automata/automata-main/build",
+  "command": "/usr/bin/c++ -Dautomata_engine_EXPORTS -I/home/xo/Downloads/automata/automata-main/include -O3 -DNDEBUG -std=gnu++17 -fPIC -o CMakeFiles/automata_engine.dir/src/dfa.cpp.o -c /home/xo/Downloads/automata/automata-main/src/dfa.cpp",
+  "file": "/home/xo/Downloads/automata/automata-main/src/dfa.cpp",
+  "output": "CMakeFiles/automata_engine.dir/src/dfa.cpp.o"
+},
+{
+  "directory": "/home/xo/Downloads/automata/automata-main/build",
+  "command": "/usr/bin/c++ -Dautomata_engine_EXPORTS -I/home/xo/Downloads/automata/automata-main/include -O3 -DNDEBUG -std=gnu++17 -fPIC -o CMakeFiles/automata_engine.dir/src/pda.cpp.o -c /home/xo/Downloads/automata/automata-main/src/pda.cpp",
+  "file": "/home/xo/Downloads/automata/automata-main/src/pda.cpp",
+  "output": "CMakeFiles/automata_engine.dir/src/pda.cpp.o"
+},
+{
+  "directory": "/home/xo/Downloads/automata/automata-main/build",
+  "command": "/usr/bin/c++ -Dautomata_engine_EXPORTS -I/home/xo/Downloads/automata/automata-main/include -O3 -DNDEBUG -std=gnu++17 -fPIC -o CMakeFiles/automata_engine.dir/src/regex_parser.cpp.o -c /home/xo/Downloads/automata/automata-main/src/regex_parser.cpp",
+  "file": "/home/xo/Downloads/automata/automata-main/src/regex_parser.cpp",
+  "output": "CMakeFiles/automata_engine.dir/src/regex_parser.cpp.o"
+},
+{
+  "directory": "/home/xo/Downloads/automata/automata-main/build",
+  "command": "/usr/bin/c++ -Dautomata_engine_EXPORTS -I/home/xo/Downloads/automata/automata-main/include -O3 -DNDEBUG -std=gnu++17 -fPIC -o CMakeFiles/automata_engine.dir/src/sequence.cpp.o -c /home/xo/Downloads/automata/automata-main/src/sequence.cpp",
+  "file": "/home/xo/Downloads/automata/automata-main/src/sequence.cpp",
+  "output": "CMakeFiles/automata_engine.dir/src/sequence.cpp.o"
+},
+{
+  "directory": "/home/xo/Downloads/automata/automata-main/build",
+  "command": "/usr/bin/c++ -Dautomata_engine_EXPORTS -I/home/xo/Downloads/automata/automata-main/include -O3 -DNDEBUG -std=gnu++17 -fPIC -o CMakeFiles/automata_engine.dir/src/approximate_matcher.cpp.o -c /home/xo/Downloads/automata/automata-main/src/approximate_matcher.cpp",
+  "file": "/home/xo/Downloads/automata/automata-main/src/approximate_matcher.cpp",
+  "output": "CMakeFiles/automata_engine.dir/src/approximate_matcher.cpp.o"
+},
+{
+  "directory": "/home/xo/Downloads/automata/automata-main/build",
+  "command": "/usr/bin/c++ -Dautomata_engine_EXPORTS -I/home/xo/Downloads/automata/automata-main/include -O3 -DNDEBUG -std=gnu++17 -fPIC -o CMakeFiles/automata_engine.dir/src/json_serializer.cpp.o -c /home/xo/Downloads/automata/automata-main/src/json_serializer.cpp",
+  "file": "/home/xo/Downloads/automata/automata-main/src/json_serializer.cpp",
+  "output": "CMakeFiles/automata_engine.dir/src/json_serializer.cpp.o"
+},
+{
+  "directory": "/home/xo/Downloads/automata/automata-main/build",
+  "command": "/usr/bin/c++  -I/home/xo/Downloads/automata/automata-main/include -O3 -DNDEBUG -std=gnu++17 -o CMakeFiles/automata_engine_static.dir/src/state.cpp.o -c /home/xo/Downloads/automata/automata-main/src/state.cpp",
+  "file": "/home/xo/Downloads/automata/automata-main/src/state.cpp",
+  "output": "CMakeFiles/automata_engine_static.dir/src/state.cpp.o"
+},
+{
+  "directory": "/home/xo/Downloads/automata/automata-main/build",
+  "command": "/usr/bin/c++  -I/home/xo/Downloads/automata/automata-main/include -O3 -DNDEBUG -std=gnu++17 -o CMakeFiles/automata_engine_static.dir/src/transition.cpp.o -c /home/xo/Downloads/automata/automata-main/src/transition.cpp",
+  "file": "/home/xo/Downloads/automata/automata-main/src/transition.cpp",
+  "output": "CMakeFiles/automata_engine_static.dir/src/transition.cpp.o"
+},
+{
+  "directory": "/home/xo/Downloads/automata/automata-main/build",
+  "command": "/usr/bin/c++  -I/home/xo/Downloads/automata/automata-main/include -O3 -DNDEBUG -std=gnu++17 -o CMakeFiles/automata_engine_static.dir/src/nfa.cpp.o -c /home/xo/Downloads/automata/automata-main/src/nfa.cpp",
+  "file": "/home/xo/Downloads/automata/automata-main/src/nfa.cpp",
+  "output": "CMakeFiles/automata_engine_static.dir/src/nfa.cpp.o"
+},
+{
+  "directory": "/home/xo/Downloads/automata/automata-main/build",
+  "command": "/usr/bin/c++  -I/home/xo/Downloads/automata/automata-main/include -O3 -DNDEBUG -std=gnu++17 -o CMakeFiles/automata_engine_static.dir/src/dfa.cpp.o -c /home/xo/Downloads/automata/automata-main/src/dfa.cpp",
+  "file": "/home/xo/Downloads/automata/automata-main/src/dfa.cpp",
+  "output": "CMakeFiles/automata_engine_static.dir/src/dfa.cpp.o"
+},
+{
+  "directory": "/home/xo/Downloads/automata/automata-main/build",
+  "command": "/usr/bin/c++  -I/home/xo/Downloads/automata/automata-main/include -O3 -DNDEBUG -std=gnu++17 -o CMakeFiles/automata_engine_static.dir/src/pda.cpp.o -c /home/xo/Downloads/automata/automata-main/src/pda.cpp",
+  "file": "/home/xo/Downloads/automata/automata-main/src/pda.cpp",
+  "output": "CMakeFiles/automata_engine_static.dir/src/pda.cpp.o"
+},
+{
+  "directory": "/home/xo/Downloads/automata/automata-main/build",
+  "command": "/usr/bin/c++  -I/home/xo/Downloads/automata/automata-main/include -O3 -DNDEBUG -std=gnu++17 -o CMakeFiles/automata_engine_static.dir/src/regex_parser.cpp.o -c /home/xo/Downloads/automata/automata-main/src/regex_parser.cpp",
+  "file": "/home/xo/Downloads/automata/automata-main/src/regex_parser.cpp",
+  "output": "CMakeFiles/automata_engine_static.dir/src/regex_parser.cpp.o"
+},
+{
+  "directory": "/home/xo/Downloads/automata/automata-main/build",
+  "command": "/usr/bin/c++  -I/home/xo/Downloads/automata/automata-main/include -O3 -DNDEBUG -std=gnu++17 -o CMakeFiles/automata_engine_static.dir/src/sequence.cpp.o -c /home/xo/Downloads/automata/automata-main/src/sequence.cpp",
+  "file": "/home/xo/Downloads/automata/automata-main/src/sequence.cpp",
+  "output": "CMakeFiles/automata_engine_static.dir/src/sequence.cpp.o"
+},
+{
+  "directory": "/home/xo/Downloads/automata/automata-main/build",
+  "command": "/usr/bin/c++  -I/home/xo/Downloads/automata/automata-main/include -O3 -DNDEBUG -std=gnu++17 -o CMakeFiles/automata_engine_static.dir/src/approximate_matcher.cpp.o -c /home/xo/Downloads/automata/automata-main/src/approximate_matcher.cpp",
+  "file": "/home/xo/Downloads/automata/automata-main/src/approximate_matcher.cpp",
+  "output": "CMakeFiles/automata_engine_static.dir/src/approximate_matcher.cpp.o"
+},
+{
+  "directory": "/home/xo/Downloads/automata/automata-main/build",
+  "command": "/usr/bin/c++  -I/home/xo/Downloads/automata/automata-main/include -O3 -DNDEBUG -std=gnu++17 -o CMakeFiles/automata_engine_static.dir/src/json_serializer.cpp.o -c /home/xo/Downloads/automata/automata-main/src/json_serializer.cpp",
+  "file": "/home/xo/Downloads/automata/automata-main/src/json_serializer.cpp",
+  "output": "CMakeFiles/automata_engine_static.dir/src/json_serializer.cpp.o"
+},
+{
+  "directory": "/home/xo/Downloads/automata/automata-main/build",
+  "command": "/usr/bin/c++  -I/home/xo/Downloads/automata/automata-main/include -O3 -DNDEBUG -std=gnu++17 -o CMakeFiles/automata_cli.dir/src/main.cpp.o -c /home/xo/Downloads/automata/automata-main/src/main.cpp",
+  "file": "/home/xo/Downloads/automata/automata-main/src/main.cpp",
+  "output": "CMakeFiles/automata_cli.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/xo/Downloads/automata/automata-main/build",
+  "command": "/usr/bin/c++  -I/home/xo/Downloads/automata/automata-main/include -O3 -DNDEBUG -std=gnu++17 -o CMakeFiles/api_server.dir/src/api_server.cpp.o -c /home/xo/Downloads/automata/automata-main/src/api_server.cpp",
+  "file": "/home/xo/Downloads/automata/automata-main/src/api_server.cpp",
+  "output": "CMakeFiles/api_server.dir/src/api_server.cpp.o"
+}
+]

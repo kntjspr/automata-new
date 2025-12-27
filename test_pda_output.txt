@@ -1,0 +1,21 @@
+=== Pushdown Automaton Demo ===
+
+Type: balanced
+Input: ((()))
+
+PDA: Balanced Parentheses { ()^n | n >= 0 }
+PDA:
+  States: (->q0) 
+  Transitions:
+    (0, (, ε) -> (0, ()
+    (0, ), () -> (0, ε)
+
+Result: ACCEPTED ✓
+
+Execution path:
+  (0, "((()))", Z) => (0, (, ε) -> (0, ()
+  (0, "(()))", Z() => (0, (, ε) -> (0, ()
+  (0, "()))", Z(() => (0, (, ε) -> (0, ()
+  (0, ")))", Z((() => (0, ), () -> (0, ε)
+  (0, "))", Z(() => (0, ), () -> (0, ε)
+  (0, ")", Z() => (0, ), () -> (0, ε)

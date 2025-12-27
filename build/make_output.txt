@@ -1,0 +1,4 @@
+[ 41%] Built target automata_engine
+[ 83%] Built target automata_engine_static
+[ 91%] Built target automata_cli
+[100%] Built target api_server
