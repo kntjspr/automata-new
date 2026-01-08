@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  /* Brutalist Palette */
+  --bg-primary: #050505;
+  --bg-secondary: #111111;
+  --bg-tertiary: #1a1a1a;
+
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --text-muted: #666666;
+
+  /* Accents */
+  --accent-acid: #ccff00;
+  --accent-neon: #00ff99;
+  --accent-cyan: #00ffff;
+  --accent-punk: #ff0099;
+
+  --border-color: #333333;
+  --border-active: #ffffff;
+
+  /* DNA Base Colors - High Contrast */
+  --dna-a: #ff0099;
+  /* Pink */
+  --dna-t: #00ffff;
+  /* Cyan */
+  --dna-g: #ccff00;
+  /* Acid Green */
+  --dna-c: #5d00ff;
+  /* Deep Purple */
+
+  /* Spacing - Mechanical */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 4rem;
+
+  /* Borders */
+  --border-width: 1px;
+  --border-width-thick: 2px;
+
+  /* Typography */
+  --font-sans: 'Space Grotesk', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  /* Effects */
+  --shadow-hard: 4px 4px 0px 0px rgba(255, 255, 255, 0.1);
+  --shadow-hover: 6px 6px 0px 0px var(--accent-acid);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.4;
+  overflow-x: hidden;
+  font-size: 16px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  background: var(--bg-primary);
+  border-left: 1px solid var(--border-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-acid);
+}
+
+/* Typography Utilities */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+code,
+pre {
+  font-family: var(--font-mono);
+}
+
+/* Global Button Styles - Brutalist */
+button {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  border: var(--border-width) solid var(--border-color);
+  background: transparent;
+  color: var(--text-primary);
+  position: relative;
+  transition: all 0.1s steps(1);
+  isolation: isolate;
+}
+
+button:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--text-primary);
+}
+
+button:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+.btn-primary {
+  background: var(--text-primary);
+  color: black;
+  border: none;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  padding: var(--spacing-md) var(--spacing-lg);
+  box-shadow: 4px 4px 0px var(--accent-acid);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.btn-primary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--accent-punk);
+  background: white;
+  color: black;
+}
+
+.btn-primary:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0px var(--accent-acid);
+}
+
+/* Form Elements */
+input,
+select,
+textarea {
+  font-family: var(--font-mono);
+  background: var(--bg-secondary);
+  border: var(--border-width) solid var(--border-color);
+  color: var(--text-primary);
+  padding: var(--spacing-sm);
+  width: 100%;
+  outline: none;
+  border-radius: 0;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--accent-acid);
+  background: var(--bg-tertiary);
+  box-shadow: -4px 4px 0px rgba(255, 255, 255, 0.1);
+}
+
+/* Utility Animations */
+@keyframes glitch-anim {
+  0% {
+    clip-path: inset(20% 0 80% 0);
+    transform: translate(-2px, 1px);
+  }
+
+  20% {
+    clip-path: inset(60% 0 10% 0);
+    transform: translate(2px, -1px);
+  }
+
+  40% {
+    clip-path: inset(40% 0 50% 0);
+    transform: translate(-2px, 2px);
+  }
+
+  60% {
+    clip-path: inset(80% 0 5% 0);
+    transform: translate(2px, -2px);
+  }
+
+  80% {
+    clip-path: inset(10% 0 70% 0);
+    transform: translate(-1px, 1px);
+  }
+
+  100% {
+    clip-path: inset(30% 0 50% 0);
+    transform: translate(1px, -1px);
+  }
+}
+
+.glitch-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.glitch-hover::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--text-primary);
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: inset(50% 0 50% 0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.glitch-hover:hover::before {
+  opacity: 1;
+  animation: glitch-anim 0.3s infinite linear alternate-reverse;
+}
