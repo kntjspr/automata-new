@@ -151,7 +151,7 @@ void printNFAVisualization(const automata::NFA& nfa, const std::string& pattern)
     
     std::cout << "╠══════════════════════════════════════════════════════════════════╣\n";
     std::cout << "║  LEGEND                                                          ║\n";
-    std::cout << "║  → = Start state    ○ = State    ◎ = Accept state               ║\n";
+    std::cout << "║  → = Start state    ○ = State    ◎ = Accept state                ║\n";
     std::cout << "║  ε = Epsilon (empty) transition                                  ║\n";
     std::cout << "╚══════════════════════════════════════════════════════════════════╝\n";
 }
