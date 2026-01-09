@@ -1,6 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { type Match } from '../utils/dnaUtils';
 import { parseRegexToNFA, describePattern } from '../utils/regexParser';
+import MatchSimulator from './MatchSimulator';
+import NFAToDFAViz from './NFAToDFAViz';
 
 interface ResultsPanelProps {
     matches: Match[];
@@ -28,7 +30,8 @@ const ResultsPanel: React.FC<ResultsPanelProps> = ({ matches, pattern, sequence 
 
     // Detect if pattern is a regex with special chars (alternation, quantifiers, anchors, etc)
     const isRegexPattern = (pat: string): boolean => {
-        return /[|*+?\\[\\]()^${}]/.test(pat);
+        // Match: | * + ? [ ] ( ) ^ $ { }
+        return /[|*+?[\]()^${}]/.test(pat);
     };
 
 
@@ -835,30 +838,257 @@ const ResultsPanel: React.FC<ResultsPanelProps> = ({ matches, pattern, sequence 
         );
     };
 
-    return (
-        <section style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: '1rem', padding: '1rem' }}>
-            {/* Automaton Visualization Section */}
-            <div style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '1rem' }}>
-                <h2 style={{ fontSize: '1rem', color: 'var(--text-primary)', margin: '0 0 1rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <span style={{ color: 'var(--accent-punk)' }}>PATTERN AUTOMATON</span>
-                    {pattern && (
-                        <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)', marginLeft: 'auto' }}>
-                            {isRegexPattern(pattern) ? 'NFA WITH ε-TRANSITIONS (ALTERNATION)' : 'DFA WITH FAILURE LINKS (KMP)'}
-                        </span>
-                    )}
-                </h2>
+    // Visualization mode tabs
+    type VizMode = 'automaton' | 'simulation' | 'conversion';
+    const [vizMode, setVizMode] = useState<VizMode>('automaton');
 
+    // NFA to DFA Conversion Display
+    const NFAtoDFAConversion = () => {
+        if (!pattern || !isRegexPattern(pattern)) {
+            return (
                 <div style={{
-                    background: 'linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.8) 100%)',
-                    padding: '1rem',
-                    border: '2px solid var(--border-color)',
-                    borderRadius: '0'
+                    padding: '2rem',
+                    textAlign: 'center',
+                    color: 'var(--text-muted)',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.85rem',
+                    border: '2px dashed var(--border-color)',
+                    background: 'rgba(0,0,0,0.3)'
                 }}>
-                    <AutomatonViz />
+                    <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🔄</div>
+                    <div>NFA → DFA CONVERSION</div>
+                    <div style={{ fontSize: '0.75rem', marginTop: '0.5rem', color: 'var(--text-secondary)' }}>
+                        Use a regex pattern (with |, *, +, etc.) to see NFA to DFA conversion
+                    </div>
+                </div>
+            );
+        }
+
+        const nfaGraph = parseRegexToNFA(pattern);
+        if (!nfaGraph) return null;
+
+        // Subset construction simulation (simplified for display)
+        const epsilonClosure = (states: Set<number>): Set<number> => {
+            const closure = new Set(states);
+            const stack = [...states];
+            while (stack.length > 0) {
+                const s = stack.pop()!;
+                nfaGraph.transitions
+                    .filter(t => t.from === s && t.isEpsilon)
+                    .forEach(t => {
+                        if (!closure.has(t.to)) {
+                            closure.add(t.to);
+                            stack.push(t.to);
+                        }
+                    });
+            }
+            return closure;
+        };
+
+        const move = (states: Set<number>, symbol: string): Set<number> => {
+            const result = new Set<number>();
+            states.forEach(s => {
+                nfaGraph.transitions
+                    .filter(t => t.from === s && t.symbol === symbol && !t.isEpsilon)
+                    .forEach(t => result.add(t.to));
+            });
+            return result;
+        };
+
+        // Get unique symbols
+        const symbols = [...new Set(
+            nfaGraph.transitions
+                .filter(t => !t.isEpsilon)
+                .map(t => t.symbol)
+        )].sort();
+
+        // Build DFA states (simplified - first few states)
+        const startClosure = epsilonClosure(new Set([nfaGraph.startState]));
+        const dfaStates: { nfaStates: Set<number>; label: string }[] = [
+            { nfaStates: startClosure, label: 'D0' }
+        ];
+
+        // Build a few more DFA states for display
+        symbols.forEach(sym => {
+            const reached = epsilonClosure(move(startClosure, sym));
+            if (reached.size > 0) {
+                dfaStates.push({ nfaStates: reached, label: `D${dfaStates.length}` });
+            }
+        });
+
+        return (
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem' }}>
+                <div style={{
+                    marginBottom: '1rem',
+                    padding: '0.75rem',
+                    background: 'rgba(0,255,255,0.1)',
+                    border: '1px solid var(--accent-cyan)'
+                }}>
+                    <strong style={{ color: 'var(--accent-cyan)' }}>Subset Construction:</strong>
+                    <span style={{ color: 'var(--text-secondary)', marginLeft: '0.5rem' }}>
+                        Each DFA state = set of NFA states reachable via ε-closure
+                    </span>
                 </div>
 
-                <DFAStats />
+                {/* Subset table */}
+                <table style={{
+                    width: '100%',
+                    borderCollapse: 'collapse',
+                    background: 'rgba(0,0,0,0.3)'
+                }}>
+                    <thead>
+                        <tr style={{ background: 'rgba(0,0,0,0.5)' }}>
+                            <th style={{
+                                padding: '0.5rem',
+                                textAlign: 'left',
+                                color: 'var(--accent-acid)',
+                                borderBottom: '1px solid var(--border-color)'
+                            }}>DFA State</th>
+                            <th style={{
+                                padding: '0.5rem',
+                                textAlign: 'left',
+                                color: 'var(--accent-cyan)',
+                                borderBottom: '1px solid var(--border-color)'
+                            }}>NFA States (ε-closure)</th>
+                            <th style={{
+                                padding: '0.5rem',
+                                textAlign: 'center',
+                                color: 'var(--text-muted)',
+                                borderBottom: '1px solid var(--border-color)'
+                            }}>Accepting?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {dfaStates.map((dState, i) => {
+                            const isAccepting = [...dState.nfaStates].some(s =>
+                                nfaGraph.acceptStates.includes(s)
+                            );
+                            return (
+                                <tr key={i} style={{
+                                    background: isAccepting ? 'rgba(204,255,0,0.1)' : 'transparent'
+                                }}>
+                                    <td style={{
+                                        padding: '0.5rem',
+                                        color: 'var(--accent-acid)',
+                                        fontWeight: 'bold'
+                                    }}>{dState.label}</td>
+                                    <td style={{
+                                        padding: '0.5rem',
+                                        color: 'var(--text-secondary)'
+                                    }}>
+                                        {'{'}{[...dState.nfaStates].map(s => `q${s}`).join(', ')}{'}'}
+                                    </td>
+                                    <td style={{
+                                        padding: '0.5rem',
+                                        textAlign: 'center',
+                                        color: isAccepting ? 'var(--accent-acid)' : 'var(--text-muted)'
+                                    }}>
+                                        {isAccepting ? '✓ Yes' : 'No'}
+                                    </td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+
+                <div style={{
+                    marginTop: '1rem',
+                    padding: '0.75rem',
+                    background: 'rgba(204,255,0,0.1)',
+                    border: '1px solid var(--accent-acid)',
+                    fontSize: '0.75rem'
+                }}>
+                    <strong style={{ color: 'var(--accent-acid)' }}>Summary:</strong>
+                    <span style={{ color: 'var(--text-secondary)', marginLeft: '0.5rem' }}>
+                        NFA has {nfaGraph.states.length} states → DFA has {dfaStates.length}+ states
+                        (showing first {dfaStates.length} reachable from start)
+                    </span>
+                </div>
             </div>
+        );
+    };
+
+    return (
+        <section style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: '1rem', padding: '1rem' }}>
+            {/* Visualization Mode Tabs */}
+            <div style={{
+                display: 'flex',
+                gap: '0',
+                borderBottom: '2px solid var(--border-color)',
+                marginBottom: '0.5rem'
+            }}>
+                {[
+                    { id: 'automaton' as VizMode, label: '⚙️ PATTERN AUTOMATON', desc: isRegexPattern(pattern) ? 'NFA' : 'DFA' },
+                    { id: 'simulation' as VizMode, label: '▶️ MATCH SIMULATION', desc: 'STEP-BY-STEP' },
+                    { id: 'conversion' as VizMode, label: '🔄 NFA → DFA', desc: 'SUBSET CONST.' },
+                ].map(tab => (
+                    <button
+                        key={tab.id}
+                        onClick={() => setVizMode(tab.id)}
+                        style={{
+                            padding: '0.75rem 1rem',
+                            background: vizMode === tab.id ? 'var(--accent-acid)' : 'transparent',
+                            border: 'none',
+                            color: vizMode === tab.id ? 'black' : 'var(--text-muted)',
+                            cursor: 'pointer',
+                            fontFamily: 'var(--font-mono)',
+                            fontSize: '0.7rem',
+                            fontWeight: vizMode === tab.id ? 700 : 400,
+                            borderBottom: vizMode === tab.id ? 'none' : '2px solid transparent',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            gap: '0.2rem'
+                        }}
+                    >
+                        <span>{tab.label}</span>
+                        <span style={{ fontSize: '0.6rem', opacity: 0.7 }}>[{tab.desc}]</span>
+                    </button>
+                ))}
+            </div>
+
+            {/* Automaton Visualization Section */}
+            {vizMode === 'automaton' && (
+                <div style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '1rem' }}>
+                    <div style={{
+                        fontSize: '0.65rem',
+                        color: 'var(--text-muted)',
+                        marginBottom: '0.5rem',
+                        fontFamily: 'var(--font-mono)'
+                    }}>
+                        {pattern && (isRegexPattern(pattern) ? 'NFA WITH ε-TRANSITIONS (REGEX)' : 'DFA WITH FAILURE LINKS (KMP)')}
+                    </div>
+
+                    <div style={{
+                        background: 'linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.8) 100%)',
+                        padding: '1rem',
+                        border: '2px solid var(--border-color)',
+                        borderRadius: '0'
+                    }}>
+                        <AutomatonViz />
+                    </div>
+
+                    <DFAStats />
+                </div>
+            )}
+
+            {/* Match Simulation Section */}
+            {vizMode === 'simulation' && (
+                <div style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '1rem' }}>
+                    <MatchSimulator
+                        sequence={sequence}
+                        pattern={pattern}
+                        matches={matches}
+                    />
+                </div>
+            )}
+
+            {/* NFA to DFA Conversion Section */}
+            {vizMode === 'conversion' && (
+                <div style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '1rem' }}>
+                    <NFAToDFAViz pattern={pattern} />
+                </div>
+            )}
 
             {/* Match Log Section */}
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
