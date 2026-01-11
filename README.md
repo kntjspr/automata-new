@@ -185,7 +185,6 @@ Start the HTTP API server:
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/api/health` | Health check |
 | POST | `/api/bio/analyze` | Analyze DNA sequence (GC content, complement) |
 | POST | `/api/bio/match` | Find pattern matches in DNA |
 | POST | `/api/pda/rna` | Validate RNA structure (dot-bracket) |
