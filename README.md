@@ -72,7 +72,7 @@ make automata_engine_static # Static library (.a)
 
 ## Command Line Interface
 
-The `automata_cli` provides four commands:
+The `automata_cli` provides four commands, if we won't use the vite web interface:
 
 ### `regex` - Regular Expression Demo
 
