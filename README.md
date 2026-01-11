@@ -13,18 +13,6 @@ A comprehensive automata theory implementation for DNA pattern matching and cont
 
 ## Quick Start
 
-### Option 1: Web Interface Only
-
-```bash
-cd vite/automata
-npm install
-npm run dev
-```
-
-Open `http://localhost:5173` in your browser.
-
-### Option 2: Full Stack (C++ Backend + Web Frontend)
-
 ```bash
 # Build C++ backend
 mkdir build && cd build
@@ -39,6 +27,7 @@ cd ../vite/automata
 npm install
 npm run dev
 ```
+A precompiled binary is also available at `/build/api_server` for linux distributions.
 
 ---
 
