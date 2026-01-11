@@ -1,16 +1,5 @@
 A comprehensive automata theory implementation for DNA pattern matching and context-free language recognition.
 
-```
-     ┌──────────────────────────────────────────────────────────────┐
-     │                    AUTOMATA SIMULATOR                        │
-     │                                                              │
-     │   ╭──────╮      ╭──────╮      ╭──────╮      ╭──────╮        │
-     │   │ NFA  │ ───▶ │ DFA  │ ───▶ │ MIN  │ ───▶ │MATCH │        │
-     │   ╰──────╯      ╰──────╯      ╰──────╯      ╰──────╯        │
-     │                                                              │
-     │   Regex ───▶ Thompson's ───▶ Subset ───▶ Hopcroft ───▶ O(n) │
-     └──────────────────────────────────────────────────────────────┘
-```
 
 ## Features
 
