@@ -1014,6 +1014,40 @@ automata_cli pda <type> <input>
 
 ## API Reference
 
+The C++ API server provides these endpoints (default port: 5000):
+
+### GET /api/health
+
+Health check endpoint.
+
+**Response:**
+```json
+{"status": "healthy", "service": "DNA Pattern Matcher", "version": "1.0.0"}
+```
+
+### POST /api/bio/analyze
+
+Analyze a DNA sequence.
+
+**Request:**
+```json
+{
+  "sequence": "ATGCGATCG"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "sequence": "ATGCGATCG",
+  "length": 9,
+  "gcContent": 55.56,
+  "complement": "TACGCTAGC",
+  "reverseComplement": "CGATCGCAT"
+}
+```
+
 ### POST /api/bio/match
 
 Find patterns in a DNA sequence.
@@ -1035,8 +1069,55 @@ Find patterns in a DNA sequence.
   "matches": [
     {"start": 0, "end": 3, "text": "ATG", "distance": 0, "strand": "forward"}
   ],
+  "count": 1,
   "dfaStates": 4,
   "matchType": "DFA"
+}
+```
+
+### POST /api/pda/rna
+
+Validate RNA secondary structure (dot-bracket notation).
+
+**Request:**
+```json
+{
+  "structure": "(((....)))"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "accepted": true,
+  "currentState": "qAccept",
+  "stack": "$",
+  "error": null,
+  "history": [...]
+}
+```
+
+### POST /api/pda/xml
+
+Validate XML well-formedness using PDA.
+
+**Request:**
+```json
+{
+  "xml": "<root><child/></root>"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "accepted": true,
+  "currentState": "qAccept",
+  "error": null,
+  "tags": [...],
+  "history": [...]
 }
 ```
 
@@ -1045,9 +1126,9 @@ Find patterns in a DNA sequence.
 ## File Structure
 
 ```
-Automata/
-├── build/
-│   └── automata_cli         # Command-line interface binary
+automata-main/
+├── CMakeLists.txt           # C++ build configuration
+├── README.md                # Project README
 ├── include/
 │   ├── automata/
 │   │   ├── common.hpp       # Type definitions, constants
@@ -1057,15 +1138,27 @@ Automata/
 │   │   ├── regex_parser.hpp # Regex parser declaration
 │   │   ├── transition.hpp   # Transition classes
 │   │   └── state.hpp        # State class
-│   └── bio/                 # Bioinformatics utilities
+│   ├── bio/
+│   │   ├── sequence.hpp     # DNA sequence utilities
+│   │   └── approximate_matcher.hpp  # Levenshtein automaton
+│   └── api/
+│       └── server.hpp       # API server declaration
 ├── src/
-│   ├── nfa.cpp              # NFA implementation (Thompson's construction)
-│   ├── dfa.cpp              # DFA implementation (subset, minimize)
-│   ├── pda.cpp              # PDA implementation (CFG conversion)
-│   ├── regex_parser.cpp     # Recursive descent regex parser
-│   └── main.cpp             # CLI entry point
-└── docs/
-    └── DOCUMENTATION.md     # This file
+│   ├── main.cpp             # CLI entry point
+│   ├── api_server.cpp       # HTTP API server
+│   ├── nfa.cpp              # NFA + Thompson's construction
+│   ├── dfa.cpp              # DFA + subset/minimize
+│   ├── pda.cpp              # PDA + CFG to PDA
+│   ├── regex_parser.cpp     # Recursive descent parser
+│   ├── sequence.cpp         # DNA sequence utilities
+│   └── approximate_matcher.cpp # Levenshtein automaton
+├── vite/automata/           # React frontend
+│   ├── src/
+│   ├── package.json
+│   └── vite.config.ts
+├── docs/
+│   └── DOCUMENTATION.md     # This file
+└── build/                   # Build output (generated)
 ```
 
 ---
