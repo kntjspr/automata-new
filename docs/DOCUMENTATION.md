@@ -17,17 +17,21 @@ DNA Pattern Matcher
 
 ```mermaid
 flowchart LR
-    P[Search Pattern] --> NFA[Build NFA]
-    NFA --> DFA[Convert to DFA]
-    DFA --> MIN[Minimize]
+    P[Search Pattern] --> T[Thompson's Construction]
+    T --> NFA[NFA]
+    NFA --> S[Subset Construction]
+    S --> DFA[DFA]
+    DFA --> H[Hopcroft's Algorithm]
+    H --> MIN[Minimized DFA]
     MIN --> SCAN[Scan Sequence]
     SCAN --> M[Matches]
 ```
 
-1. Your search pattern is converted to a Non-deterministic Finite Automaton (NFA)
-2. The NFA is converted to a Deterministic Finite Automaton (DFA)
-3. The DFA is minimized for efficiency
-4. The sequence is scanned in linear time O(n)
+**Pipeline:**
+1. **Thompson's Construction**: Regex → NFA with ε-transitions
+2. **Subset Construction**: NFA → DFA via powerset construction
+3. **Hopcroft's Minimization**: DFA → Minimal DFA
+4. **Linear Scan**: Match in O(n) time
 
 ---
 
